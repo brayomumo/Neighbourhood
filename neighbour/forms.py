@@ -11,10 +11,10 @@ class NewsForm(forms.ModelForm):
         model=News
         exclude=['author','neighbourhood','post_date']
 
-# class UpdatebioForm(forms.ModelForm):
-#     class Meta:
-#         model = Profile
-#         exclude = ['username',]
+class UpdatebioForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['username',]
 
 # class NewBusinessForm(forms.ModelForm):
 #     class Meta:
