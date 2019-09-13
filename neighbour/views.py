@@ -41,3 +41,20 @@ def create_profile(request):
 
         form = ProfileForm()
     return render(request, 'create_profile.html', {"form": form})
+
+
+def edit_profile(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = UpdatebioForm(request.POST, request.FILES,
+                             instance=current_user.profile)
+        print(form.is_valid())
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.user = current_user
+            image.save()
+        return redirect('home')
+
+    else:
+        form = UpdatebioForm()
+    return render(request, 'edit_profile.html', {"form": form})
