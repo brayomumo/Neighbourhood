@@ -85,3 +85,14 @@ def new_business(request):
         form = NewBusinessForm()
 
     return render(request, 'new_business.html', {"form": form})
+
+
+def health(request):
+    current_user = request.user
+    profile = Profile.objects.get(username=current_user)
+    healthservices = Health.objects.filter(
+        neighbourhood_id=profile.neighbourhood)
+
+    return render(request, 'health.html', {"healthservices": healthservices})
+
+
