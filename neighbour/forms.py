@@ -16,7 +16,7 @@ class UpdatebioForm(forms.ModelForm):
         model = Profile
         exclude = ['username',]
 
-# class NewBusinessForm(forms.ModelForm):
-#     class Meta:
-#         model=Business
-#         exclude=['owner']
+class NewBusinessForm(forms.ModelForm):
+    class Meta:
+        model=Business
+        exclude=['owner']
