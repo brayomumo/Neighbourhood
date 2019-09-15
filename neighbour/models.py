@@ -4,9 +4,8 @@ from tinymce.models import HTMLField
 from django.db.models import Q
 import datetime as dt
 
+
 # Create your models here.
-
-
 class Neighbourhood(models.Model):
     name = models.CharField(max_length=100, null=True)
     image = models.ImageField(upload_to='hoods/', null=True)
