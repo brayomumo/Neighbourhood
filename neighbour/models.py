@@ -86,6 +86,54 @@ class Healthservices(models.Model):
         cls.objects.filter(healthservices=healthservices).delete()
 
 
+class Health(models.Model):
+    health_name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='images/', null=True)
+    neighbourhood_id = models.ForeignKey(
+        Neighbourhood, on_delete=models.CASCADE)
+    email = models.EmailField()
+    contact = models.IntegerField()
+
+    def __str__(self):
+        return self.health_name
+
+
+class Authorities(models.Model):
+    authority_name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='images/', null=True)
+    neighbourhood_id = models.ForeignKey(
+        Neighbourhood, on_delete=models.CASCADE)
+    email = models.EmailField()
+    contact = models.IntegerField()
+
+    def __str__(self):
+        return self.authority_name
+
+
+class Profile(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile_photo = models.ImageField(upload_to='pics/')
+    bio = models.CharField(max_length=100)
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+    email = models.EmailField(max_length=100)
+
+    def save_profile(self):
+        self.save()
+
+    @classmethod
+    def get_by_id(cls, id):
+        profile = Profile.objects.get(user=id)
+        return profile
+
+    def filter_by_id(cls, id):
+        profile = Profile.objects.filter(user=id).first()
+        return profile
+
+    def get_absolute_url(self):
+        return reverse('user_profile')
+
+
+
 class Business(models.Model):
     business_name = models.CharField(max_length=30, null=True)
     image = models.ImageField(upload_to='images/', null=True)
@@ -138,50 +186,3 @@ class Business(models.Model):
 
     def delete_comment(self):
         Comments.objects.get(id=self.id).delete()
-
-
-class Health(models.Model):
-    health_name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='images/', null=True)
-    neighbourhood_id = models.ForeignKey(
-        Neighbourhood, on_delete=models.CASCADE)
-    email = models.EmailField()
-    contact = models.IntegerField()
-
-    def __str__(self):
-        return self.health_name
-
-
-class Authorities(models.Model):
-    authority_name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='images/', null=True)
-    neighbourhood_id = models.ForeignKey(
-        Neighbourhood, on_delete=models.CASCADE)
-    email = models.EmailField()
-    contact = models.IntegerField()
-
-    def __str__(self):
-        return self.authority_name
-
-
-class Profile(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile_photo = models.ImageField(upload_to='pics/')
-    bio = models.CharField(max_length=100)
-    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
-    email = models.EmailField(max_length=100)
-
-    def save_profile(self):
-        self.save()
-
-    @classmethod
-    def get_by_id(cls, id):
-        profile = Profile.objects.get(user=id)
-        return profile
-
-    def filter_by_id(cls, id):
-        profile = Profile.objects.filter(user=id).first()
-        return profile
-
-    def get_absolute_url(self):
-        return reverse('user_profile')
