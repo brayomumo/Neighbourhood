@@ -139,7 +139,7 @@ def search_results(request):
         searched_business = Business.search_by_business(business)
         message = f"{business}"
 
-        return render(request, 'search.html', {"message": message, "news": searched_news})
+        return render(request, 'search.html', {"message": message})
 
     else:
         message = "You haven't searched for any term"
