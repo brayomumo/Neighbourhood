@@ -60,3 +60,10 @@ def edit_profile(request):
     return render(request, 'edit_profile.html', {"form": form})
 
 
+def businesses(request):
+    current_user = request.user
+    profile = Profile.objects.get(username=current_user)
+    business = Business.objects.filter(neighbourhood_id=profile.neighbourhood)
+    return render(request, 'business.html', {'business': business})
+
+
