@@ -94,3 +94,53 @@ def health(request):
         neighbourhood_id=profile.neighbourhood)
 
     return render(request, 'health.html', {"healthservices": healthservices})
+
+
+def authorities(request):
+    current_user = request.user
+    profile = Profile.objects.get(username=current_user)
+    authorities = Authorities.objects.filter(
+        neighbourhood_id=profile.neighbourhood)
+
+    return render(request, 'authorities.html', {"authorities": authorities})
+
+
+def news(request):
+    current_user = request.user
+    profile = Profile.objects.get(username=current_user)
+    news = News.objects.filter(neighbourhood_id=profile.neighbourhood)
+
+    return render(request, 'news.html', {"news": news})
+
+
+def new_news(request):
+    current_user = request.user
+    profile = Profile.objects.get(username=current_user)
+
+    if request.method == "POST":
+        form = NewsForm(request.POST, request.FILES)
+        if form.is_valid():
+            news = form.save(commit=False)
+            news.author = current_user
+            news.neighbourhood_id = profile.neighbourhood
+            news.save()
+
+        return HttpResponseRedirect('/news')
+
+    else:
+        form = NewsForm()
+
+    return render(request, 'new_news.html', {"form": form})
+
+
+def search_results(request):
+    if 'name' in request.GET and request.GET["name"]:
+        business = request.GET.get("name")
+        searched_business = Business.search_by_business(business)
+        message = f"{business}"
+
+        return render(request, 'search.html', {"message": message, "news": searched_news})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'search.html', {"message": message})
