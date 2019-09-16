@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+{% block content %}
+
+{% include "navbar.html" %}
+
+
+
+
+<head>
+<style>
+.button {
+  background-color: #2196F3;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 50%
+}
+</style>
+<br>
+<br>
+
+<div class="w3-main w3-padding-large" style="margin-left:60%">
+
+ <div class="content-section" style="margin-left:30px;">
+    <div class="media">
+    {% if profile.profile_photo %}
+    <img src="{{profile.profile_photo.url}}" style="border-radius: 50%; width:250px;height:250px;" alt="image">
+    {% else %}
+    <img src="/static/images/default.jpeg" style="border-radius: 50%; width:250px;height:250px;" alt="image">
+    {%endif%}
+    <div class="media-body">
+      <h2 class="account-heading" style=" font-family: 'ABeeZee', sans-serif;"><strong>Username:</strong> {{ user.username }}</h2>
+      <p class="text-secondary" style="font-family: 'ABeeZee', sans-serif;"><strong>Email: </strong>{{ user.email }}</p>
+      <p class="text-secondary" style="font-family: 'ABeeZee', sans-serif;"><strong>Bio: </strong> {{ profile.bio }}</p>
+      <p class="text-secondary" style="font-family: 'ABeeZee', sans-serif;"><strong>Neighbourhood: </strong> {{ profile.neighbourhood}}</p>
+      <a href="{% url 'edit_profile' %}" class="btn btn-primary login-button">Edit Profile</a>
+    </div>
+    </div>
+    <form  action="/accounts/register/" method="post">
+       {{ form.media }}
+        {% csrf_token %}
+                             
+        <input type="hidden" name="next" value="{{next}}">
+                      
+    </form>
+    
+    <br>
+    <br>
+    <br>
+                      
+                              
+  
+    </div>
+  {% endblock %}
+  </div>

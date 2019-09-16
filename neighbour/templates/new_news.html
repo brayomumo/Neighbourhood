@@ -1,0 +1,83 @@
+{% extends "registration/base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block content %}
+{% include "navbar.html" %}
+<div class="w3-main w3-padding-large" style="margin-left:40%; ">
+
+<style>
+  body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+</style>
+<div class="container" >
+  <div class="row">
+    <!-- Empty div -->
+
+    <div class="col-md-4 phone-section">
+    </div>
+
+
+
+    <div class="col-md-4 form-section">
+  
+
+    {% if form.errors %}
+        <p>Please enter correct value</p>
+      {% endif %}
+
+      <div  style="margin-top:150px;">
+
+        <div class="panel-body">
+
+          <div class="text-center">
+            <h3>Add news</h3>
+          <form action="{% url 'new_news' %}" method="post" enctype="multipart/form-data">
+
+            {% csrf_token%}
+            {% bootstrap_form form %}
+
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary login-button" value="Post">
+
+            </div>
+            <input type="hidden" name="next" value="/">
+
+          </form>
+        </div>
+        </div>
+
+    
+
+    </div>
+    <!-- Empty div -->
+    <div class="col-md-4"></div>
+  </div>
+
+</div>
+</div>
+
+<style>
+.panel{
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) fixed;
+}
+p, label,a{
+  color:black;
+  font-size: 15px;
+  font-family: "Montserrat", sans-serif
+}
+.panel-default{
+  border-color: transparent;
+}
+input,h3{
+  text-align: center;
+  color: black;
+ 
+}
+input[type=text] {
+    border-radius:40px;
+}
+textarea{
+    border-radius:40px;
+}
+</style>
+{% endblock %}

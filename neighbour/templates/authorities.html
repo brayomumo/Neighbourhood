@@ -1,0 +1,70 @@
+ 
+{% load bootstrap3 %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.container {
+position: relative;
+width: 50%;
+}
+.image {
+opacity: 1;
+display: block;
+width: 100%;
+height: auto;
+transition: .5s ease;
+backface-visibility: hidden;
+}
+.middle {
+transition: .5s ease;
+opacity: 0;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+-ms-transform: translate(-50%, -50%);
+text-align: center;
+}
+.container:hover .image {
+opacity: 0.3;
+}
+.container:hover .middle {
+opacity: 1;
+}
+.text {
+background-color:transparent;
+color: white;
+font-size: 16px;
+padding: 16px 32px;
+border: 2px solid;
+}
+</style>
+</head>
+{% include "base.html" %}
+
+<body style="font-family: 'ABeeZee', sans-serif;">
+  <div class="w3-main w3-padding-large" style="margin-left:60%;">
+  
+<div class="card-deck" style="margin:10px;">
+{% for authority in authorities %}
+  
+            <div class="card">
+                <img class="card-img-top" src="{{ authority.image.url }}" alt="Card image cap" style="width:34rem;height:28rem;">
+              <div class="card-body">
+                <h2 class="card-title" style="font-family: 'ABeeZee', sans-serif; color:black;"><strong>Police Station: </strong>{{ authority.authority_name }}</h2>
+                <h5 class="card-text" style="font-family: 'ABeeZee', sans-serif; color:black;"><strong>Email: </strong>{{ authority.email }}</h5>
+                <h5 class="card-text" style="font-family: 'ABeeZee', sans-serif; color:black;"><strong>Contact: </strong>{{ authority.contact }}</h5>
+              </div>
+            </div>
+            </div> 
+            <br>
+            <br>   
+    
+
+{% endfor %}
+</div>
+{% endblock %}

@@ -5,12 +5,7 @@
 <head>
   <meta charset="utf-8">
 
-  {% if title %}
-  <title>Moringa Tribune - {{title}}</title>
-  {% else %}
-    <title> Moringa Tribune </title>
-  {% endif %}
-
+    <title> Neighbourhood</title>
   {% block styles %}
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/basenews.css' %}">
@@ -19,10 +14,16 @@
 </head>
 <body>
     {% include "navbar.html" %}
+    <div class="wrapper">
+        <div class="top">
+            <img src="https://marksammons.com/wp-content/uploads/2018/11/vecindario-ideal.jpg">
+        </div>
+    </div>
     {% block content %}
-     <h1 class='text-center'>News for {{date|date:"l d-F Y"}}</h1> {%endblock%}
+     
+    {%endblock%}
 
-    {% block scripts %} {{block.super}}
+    {% block scripts %} 
       <script type="text/javascript" src="{%static 'js/newsletter.js'%}"></script>
     {% endblock %}    
 </body>

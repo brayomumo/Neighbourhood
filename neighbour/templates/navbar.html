@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<title>Hood</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+.bgimg {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('static/images/architecture-1477041.jpg');
+  min-height: 100%;
+}
+</style>
+<body>
+
+
+<nav class="w3-sidebar w3-black w3-animate-right w3-xxlarge" style="display:none;padding-top:150px;right:0;z-index:2" id="mySidebar">
+  <a href="javascript:void(0)" onclick="closeNav()" class="w3-button w3-black w3-xxxlarge w3-display-topright" style="padding:0 12px;">
+    <i class="fa fa-remove"></i>
+  </a>
+  <div class="w3-bar-block w3-center">
+    <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Home</a>
+    <div class="search-container" style="font-family: 'Montserrat', sans-serif">
+      <form action="{% url 'search_results' %}">
+      <input style="font-family: 'Montserrat', sans-serif; color:black; font-size:17px;" type="text" placeholder="Search...." name="search">
+      <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+      </div>
+    {% if user.is_authenticated %}
+
+    <a href="{% url 'new_news' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Add News</a>
+    <a href="{% url 'my_profile' %}" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Profile</a>
+    <a href="/logout" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Logout</a>
+   
+    {% else %}
+    <a href="/accounts/register" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Register</a>
+    <a href="/accounts/login" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Login</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Neighbourhoods</a>
+    
+     {% endif %}
+     
+  </div>
+</nav>
+
+<!-- Page Content -->
+<div class="w3-main w3-padding-large" style="margin-left:40%">
+
+  <!-- Menu icon to open sidebar -->
+  <span class="w3-button w3-top w3-white w3-xxlarge w3-text-grey w3-hover-text-black" style="width:auto;right:0;" onclick="openNav()"><i class="fa fa-bars"></i></span>
+
+  <!-- Header -->
+  <!-- <header class="w3-container w3-center" style="padding:128px 16px" id="home">
+    <h1 class="w3-jumbo"><b>Hood</b></h1>
+    <img src="https://cdn.pixabay.com/photo/2017/01/13/11/50/boston-1977009_960_720.jpg" class="w3-image w3-hide-large w3-hide-small w3-round" style="display:block;width:60%;margin:auto;">
+    <img src="https://cdn.pixabay.com/photo/2017/01/13/11/50/boston-1977009_960_720.jpg" class="w3-image w3-hide-large w3-hide-medium w3-round" width="1000" height="1333">
+  </header> -->
+
+   
+<!-- END PAGE CONTENT -->
+</div>
+
+<script>
+// Open and close sidebar
+function openNav() {
+  document.getElementById("mySidebar").style.width = "60%";
+  document.getElementById("mySidebar").style.display = "block";
+}
+function closeNav() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+
+</body>
+</html>

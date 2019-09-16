@@ -1,29 +1,45 @@
 {%extends "registration/base.html"%}
 {% load bootstrap3 %}
 {% block content %}
+
+
+<img src="https://cdn.pixabay.com/photo/2015/03/09/15/55/bike-665925__340.jpg"
+  style="width:100%; height:450px; margin-top:0px;">
 <div class="container">
   <div class="row">
     <!-- Empty div -->
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
+    <div class=" col-md-4" style="margin-top:50px; width:5rem; margin-left:20rem;"></div>
+    <div class="col-6 col-sm-6 col-md-4 col-lg-6" style="margin-top:60px;">
       {% if form.errors %}
-        <p> Password or Username is incorrect </p>
+      <p>
+        Password or Username is incorrect
+      </p>
       {% endif %}
       <div class="panel panel-default">
 
         <div class="panel-heading">
-          <h3 class="text-center">Sign In</h3>
+          <h3 class="text-center" style="font-family: 'Playfair Display', serif;font-family: 'Sniglet', cursive;">Sign
+            In</h3>
         </div>
         <div class="panel-body">
 
-          <form  action="/accounts/login/" method="post">
+          <form action="/accounts/login/" method="post">
             {% csrf_token %}
             {% bootstrap_form form%}
+            <div class="form-group" style="font-family: 'Playfair Display', serif;font-family: 'Sniglet', cursive;">
+              <input type="submit" class="btn btn-primary btn-sm"
+                style="font-family: 'Playfair Display', serif;font-family: 'Sniglet', cursive; border-radius:40px; font-size:15px;"
+                value="Login">
 
-            <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Login">
+
             </div>
 
+            <h5 style="font-family: 'Playfair Display', serif;font-family: 'Sniglet', cursive;">
+              Don't have an account ?
+              <a href="/accounts/register"
+                style="font-family: 'Playfair Display', serif;font-family: 'Sniglet', cursive;">
+                Sign up here</a>
+            </h5>
             <input type="hidden" name="next" value="{{next}}">
 
           </form>
