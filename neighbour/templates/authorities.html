@@ -7,10 +7,10 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-.container {
+/* .container {
 position: relative;
 width: 50%;
-}
+} */
 .image {
 opacity: 1;
 display: block;
@@ -47,24 +47,31 @@ border: 2px solid;
 {% include "base.html" %}
 
 <body style="font-family: 'ABeeZee', sans-serif;">
-  <div class="w3-main w3-padding-large" style="margin-left:60%;">
+    <div class="row">
+            {% for authority in authorities %}
+                          
+        <div class="col-md-6">
+                <div class="w3-main w3-padding-large" style="margin-left:60%;">
   
-<div class="card-deck" style="margin:10px;">
-{% for authority in authorities %}
+                        <div class="card-deck" style="margin:10px;">
+                       
+                                    <div class="card">
+                                        <img class="card-img-top" src="{{ authority.image.url }}" alt="Card image cap" style="width:34rem;height:28rem;">
+                                      <div class="card-body">
+                                        <h2 class="card-title" style="font-family: 'ABeeZee', sans-serif; color:black;"><strong>Police Station: </strong>{{ authority.authority_name }}</h2>
+                                        <h5 class="card-text" style="font-family: 'ABeeZee', sans-serif; color:black;"><strong>Email: </strong>{{ authority.email }}</h5>
+                                        <h5 class="card-text" style="font-family: 'ABeeZee', sans-serif; color:black;"><strong>Contact: </strong>{{ authority.contact }}</h5>
+                                      </div>
+                                    </div>
+                                    </div> 
+                                    <br>
+                                    <br>   
+                            
+                        
+                       
+                        </div>
+        </div>
+        {% endfor %}
+    </div>
   
-            <div class="card">
-                <img class="card-img-top" src="{{ authority.image.url }}" alt="Card image cap" style="width:34rem;height:28rem;">
-              <div class="card-body">
-                <h2 class="card-title" style="font-family: 'ABeeZee', sans-serif; color:black;"><strong>Police Station: </strong>{{ authority.authority_name }}</h2>
-                <h5 class="card-text" style="font-family: 'ABeeZee', sans-serif; color:black;"><strong>Email: </strong>{{ authority.email }}</h5>
-                <h5 class="card-text" style="font-family: 'ABeeZee', sans-serif; color:black;"><strong>Contact: </strong>{{ authority.contact }}</h5>
-              </div>
-            </div>
-            </div> 
-            <br>
-            <br>   
-    
-
-{% endfor %}
-</div>
 {% endblock %}
