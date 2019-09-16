@@ -133,7 +133,6 @@ class Profile(models.Model):
         return reverse('user_profile')
 
 
-
 class Business(models.Model):
     business_name = models.CharField(max_length=30, null=True)
     image = models.ImageField(upload_to='images/', null=True)
@@ -161,7 +160,7 @@ class Business(models.Model):
         return reverse('business')
 
     def __str__(self):
-        return self.name
+        return self.business_name
 
     @classmethod
     def get_business(cls, id):
